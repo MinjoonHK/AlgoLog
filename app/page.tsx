@@ -1,6 +1,14 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client";
+import SolutionBoard from "./dashboard/solutionboard/page";
+import { Provider } from "react-redux";
+import { store } from "../lib/store.ts";
 
-export default function Home() {
-  return <div>Hello World!</div>;
+export default async function Home() {
+  return (
+    <div>
+      <Provider store={store}>
+        <SolutionBoard />
+      </Provider>
+    </div>
+  );
 }

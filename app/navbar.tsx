@@ -1,30 +1,64 @@
-"use client";
-
+import { cookies } from "next/headers";
 import Link from "next/link";
+import "./darkMode.css";
 
-const linkStyle: React.CSSProperties = {
-  textDecoration: "none",
-  color: "grey",
-  fontWeight: "bold",
-};
+import DarkMode from "./darkMode";
+import SignOut from "./signOut";
 
+let mode = cookies().get("mode");
+console.log(mode);
 const NavBar = () => {
+  const linkStyle = {
+    textDecoration: "none",
+    color: "grey",
+    fontWeight: "bold",
+  };
+
+  let navBarClassName = "";
+
+  if (mode && mode.value == "light") {
+    navBarClassName = "navBarLight";
+  } else {
+    navBarClassName = "navBarDark";
+  }
   return (
     <div>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          backgroundColor: "#E2E2E2",
-          height: "10vh",
-          alignItems: "center",
-        }}
-      >
+      <div className={navBarClassName}>
+        <div style={{ marginLeft: "5%" }}>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              border: "1px solid black",
+              borderRadius: "25px",
+              backgroundColor: "rgb(135,97,225)",
+              width: "160px",
+              height: "40px",
+              color: "white",
+            }}
+          >
+            <img
+              style={{ width: "24px", height: "24px" }}
+              src="/img/algoIcon.png"
+              alt=""
+            />
+            <span
+              style={{
+                fontWeight: "bold",
+                fontSize: "24px",
+                marginLeft: "5px",
+              }}
+            >
+              ALGOLOG
+            </span>
+          </div>
+        </div>
         <div
           style={{
             display: "flex",
             justifyContent: "space-between",
             width: "50%",
+            marginLeft: "9%",
           }}
         >
           <div>
@@ -48,6 +82,8 @@ const NavBar = () => {
             </Link>
           </div>
         </div>
+        <SignOut />
+        <DarkMode />
       </div>
     </div>
   );

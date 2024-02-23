@@ -1,9 +1,8 @@
 "use client";
-
 import { Button, Checkbox, Form, Input, Card, Divider, Avatar } from "antd";
-import axios from "axios";
 import { CopyrightOutlined } from "@ant-design/icons";
 import Link from "next/link";
+import SocialLogin from "./socailLogin";
 
 interface LoginForm {
   email: any;
@@ -25,6 +24,7 @@ function Login() {
           width: "500px",
           textAlign: "center",
           paddingTop: "35px",
+          backgroundColor: "transparent",
           border: "transparent",
           display: "flex",
           justifyContent: "center",
@@ -33,7 +33,6 @@ function Login() {
         <div
           style={{
             textAlign: "center",
-
             fontSize: "45px",
             fontWeight: "bold",
           }}
@@ -89,7 +88,7 @@ function Login() {
               style={{
                 width: "100%",
                 height: "46.4px",
-                backgroundColor: "rgb(213,215,217)",
+                backgroundColor: "rgb(135,97,225)",
                 color: "white",
                 alignItems: "center",
                 display: "flex",
@@ -132,24 +131,13 @@ function Login() {
               </Button>
             </Link>
             <Divider style={{ width: "364.4px" }}>SNS 계정으로 로그인</Divider>
-            <div style={{ display: "flex", justifyContent: "center" }}>
-              <div
-                style={{
-                  width: "75%",
-                  display: "flex",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Avatar size={55} src={"/img/kakao_icon4.png"} />
-                <Avatar size={55} src={"/img/naver_icon.png"} />
-                <Avatar size={55} src={"/img/google_icon3.png"} />
-              </div>
-            </div>
+            <SocialLogin />
             <div style={{ marginTop: "50px", fontWeight: "bold" }}>
               <div>
                 <CopyrightOutlined />
                 Park Min Joon
               </div>
+              <div>2024 All rights reserved.</div>
             </div>
           </Form.Item>
         </Form>

@@ -12,8 +12,7 @@ function SignUp() {
 
   const onFinish = async ({ email, password, username }) => {
     try {
-      console.log(email, password, username);
-      const res = await axios.post("/signup", {
+      const res = await axios.post("/api/auth/signup", {
         email,
         password,
         username,
