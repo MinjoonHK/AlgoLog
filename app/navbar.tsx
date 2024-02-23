@@ -5,25 +5,22 @@ import "./darkMode.css";
 import DarkMode from "./darkMode";
 import SignOut from "./signOut";
 
-let mode = cookies().get("mode");
-console.log(mode);
 const NavBar = () => {
   const linkStyle = {
     textDecoration: "none",
     color: "grey",
     fontWeight: "bold",
   };
-
-  let navBarClassName = "";
-
-  if (mode && mode.value == "light") {
-    navBarClassName = "navBarLight";
-  } else {
-    navBarClassName = "navBarDark";
-  }
+  let mode = cookies().get("mode");
   return (
     <div>
-      <div className={navBarClassName}>
+      <div
+        className={
+          mode != undefined && mode.value == "dark"
+            ? "navBarDark"
+            : "navBarLight"
+        }
+      >
         <div style={{ marginLeft: "5%" }}>
           <div
             style={{
