@@ -1,13 +1,22 @@
 "use client";
 
+import { SwapLeftOutlined } from "@ant-design/icons";
 import { Avatar, Button } from "antd";
 import { signIn } from "next-auth/react";
+import { useRouter, redirect } from "next/navigation";
+import Swal from "sweetalert2";
 
 export default function SocialLogin() {
+  const router = useRouter();
   return (
     <div>
       <div>
-        <Button style={{ height: "40px", width: "364.4px" }}>
+        <Button
+          onClick={async () => {
+            await signIn("kakao", { callbackUrl: "/dashboard/mysolutions" });
+          }}
+          style={{ height: "40px", width: "364.4px", marginTop: "15px" }}
+        >
           <span style={{ marginRight: "10%", fontWeight: "bold" }}>
             카카오톡으로 로그인 하기{" "}
           </span>
@@ -16,13 +25,13 @@ export default function SocialLogin() {
       </div>
       <div>
         <Button
-          onClick={() => {
-            signIn();
+          onClick={async () => {
+            await signIn("github", { callbackUrl: "/dashboard/mysolutions" });
           }}
-          style={{ height: "40px", width: "364.4px" }}
+          style={{ height: "40px", width: "364.4px", marginTop: "15px" }}
         >
           <span style={{ marginRight: "10%", fontWeight: "bold" }}>
-            깃헙계정으로 로그인 하기{" "}
+            깃헙계정으로 로그인 하기
           </span>
           <Avatar
             style={{ cursor: "pointer" }}
@@ -32,9 +41,22 @@ export default function SocialLogin() {
         </Button>
       </div>
       <div>
-        <Button style={{ height: "40px", width: "364.4px" }}>
+        <Button
+          onClick={async () => {
+            await signIn("google", { callbackUrl: "/dashboard/mysolutions" });
+            if (!signIn) {
+              Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Something went wrong!",
+                footer: '<a href="#">Why do I have this issue?</a>',
+              });
+            }
+          }}
+          style={{ height: "40px", width: "364.4px", marginTop: "15px" }}
+        >
           <span style={{ marginRight: "10%", fontWeight: "bold" }}>
-            구글계정으로 로그인 하기{" "}
+            구글계정으로 로그인 하기
           </span>
           <Avatar size={30} src={"/img/google_icon3.png"} />
         </Button>

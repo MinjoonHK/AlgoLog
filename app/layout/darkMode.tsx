@@ -13,10 +13,9 @@ export default function DarkMode() {
         .pop()
         ?.split(";")[0];
       setMode(cookieValue || "");
-      if (cookieValue == "") {
-        document.cookie = "mode=light; max-age=" + 3600 * 24 * 400;
-      }
     } else {
+      setMode("light");
+      document.cookie = "mode=light; max-age=" + 3600 * 24 * 400;
     }
   }, []);
   return (

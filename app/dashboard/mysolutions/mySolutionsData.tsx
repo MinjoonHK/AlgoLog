@@ -6,6 +6,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Search, { SearchProps } from "antd/es/input/Search";
 import Link from "next/link";
+import Meta from "antd/es/card/Meta";
 
 interface dataType {
   _id: String;
@@ -19,7 +20,6 @@ const onSearch: SearchProps["onSearch"] = (value, _e, info) =>
 const MySolutionsData = () => {
   const [postItems, setPostItems] = useState<dataType[]>([]);
   const [loading, setLoading] = useState(true);
-  const [deleteButton, setDeleteButton] = useState(-1);
 
   const fetchData = async () => {
     axios.get("/api/posts").then((response) => {
@@ -28,6 +28,7 @@ const MySolutionsData = () => {
   };
 
   useEffect(() => {
+    setLoading(true);
     fetchData();
     setLoading(false);
   }, []);
@@ -52,7 +53,7 @@ const MySolutionsData = () => {
               작성한 풀이수: {postItems.length}
             </span>
             <Button style={{ marginLeft: "20px" }}>
-              <Link href={`/details/`}>
+              <Link href={"/write"}>
                 <EditOutlined /> 새 풀이
               </Link>
             </Button>
@@ -74,32 +75,26 @@ const MySolutionsData = () => {
           >
             {postItems.map((item, idx) => {
               return (
-                <div key={idx} style={{ margin: "50px", textAlign: "center" }}>
-                  <Link href={`/details/${item._id}`}>
+                <div key={idx} style={{ margin: "25px", textAlign: "center" }}>
+                  <Link
+                    style={{ textDecoration: "none" }}
+                    href={`/details/${item._id}`}
+                  >
                     <Card
-                      onMouseEnter={() => {
-                        setDeleteButton(idx);
-                      }}
-                      onMouseLeave={() => {
-                        setDeleteButton(-1);
-                      }}
-                      style={{ border: "2px solid rgb(226,226,226)" }}
-                      size="small"
-                      title={item.title}
-                      // extra={
-                      //   <div
-                      //     style={{
-                      //       position: "absolute",
-                      //       top: "0",
-                      //       right: "0",
-                      //       width: "20px",
-                      //     }}
-                      //   >
-                      //     {deleteButton == idx ? <UnorderedListOutlined /> : null}
-                      //   </div>
-                      // }
+                      hoverable
+                      style={{ width: 300 }}
+                      cover={
+                        <img
+                          style={{ width: 300 }}
+                          alt="example"
+                          src="https://file.newswire.co.kr/data/datafile2/thumb_640/2021/06/1993996598_20210610150326_5364622170.jpg"
+                        />
+                      }
                     >
-                      {item.content}
+                      <Meta
+                        style={{ height: 30, textAlign: "left" }}
+                        title={item.title}
+                      />
                     </Card>
                   </Link>
                 </div>

@@ -1,6 +1,6 @@
 "use client";
+
 import { Button, Checkbox, Form, Input, Card, Divider, Avatar } from "antd";
-import { CopyrightOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import SocialLogin from "./socailLogin";
 
@@ -35,6 +35,7 @@ function Login() {
             textAlign: "center",
             fontSize: "45px",
             fontWeight: "bold",
+            color: "white",
           }}
         >
           A L G O L O G
@@ -90,6 +91,7 @@ function Login() {
                 height: "46.4px",
                 backgroundColor: "rgb(135,97,225)",
                 color: "white",
+                borderColor: "transparent",
                 alignItems: "center",
                 display: "flex",
               }}
@@ -130,15 +132,10 @@ function Login() {
                 </div>
               </Button>
             </Link>
-            <Divider style={{ width: "364.4px" }}>SNS 계정으로 로그인</Divider>
+            <Divider style={{ width: "364.4px", color: "white" }}>
+              SNS 계정으로 로그인
+            </Divider>
             <SocialLogin />
-            <div style={{ marginTop: "50px", fontWeight: "bold" }}>
-              <div>
-                <CopyrightOutlined />
-                Park Min Joon
-              </div>
-              <div>2024 All rights reserved.</div>
-            </div>
           </Form.Item>
         </Form>
       </Card>

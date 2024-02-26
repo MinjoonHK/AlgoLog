@@ -2,6 +2,7 @@
 
 import { Button, Card, Form, Input } from "antd";
 import axios from "axios";
+import { useSession } from "next-auth/react";
 
 const inputStyle = {
   width: "364.4px",
@@ -9,6 +10,10 @@ const inputStyle = {
 
 function SignUp() {
   const [form] = Form.useForm();
+  const { data: session, status } = useSession();
+  if (status === "authenticated" && session.user != undefined) {
+    console.log(session, status);
+  }
 
   const onFinish = async ({ email, password, username }) => {
     try {
@@ -26,7 +31,7 @@ function SignUp() {
   };
 
   return (
-    <div style={{ backgroundColor: "rgb(226,226,226)", height: "100vh" }}>
+    <div>
       <div
         style={{
           textAlign: "center",

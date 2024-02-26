@@ -4,7 +4,12 @@ import StyledComponentsRegistry from "../lib/AntdRegistry";
 import "./globals.css";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
-import Navbar from "./navbar";
+import Navbar from "./layout/navbar";
+import { cookies } from "next/headers";
+import "./layout/darkMode.css";
+
+import CustomFooter from "./layout/footer";
+import Providers from "./providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,16 +22,33 @@ export const metadata = {
 };
 
 const RootLayout = async ({ children }: React.PropsWithChildren) => {
-  const session = await getServerSession(authOptions);
+  let mode = cookies().get("mode");
   return (
     <html>
       <body suppressHydrationWarning={true} className={inter.className}>
-        <StyledComponentsRegistry>
-          <Navbar />
-          <div style={{ backgroundColor: "#E2E2E2", height: "100vh" }}>
-            {children}
-          </div>
-        </StyledComponentsRegistry>
+        <Providers>
+          <StyledComponentsRegistry>
+            <Navbar />
+            <div
+              className={
+                mode != undefined && mode.value == "dark"
+                  ? "mainBackgroundDark"
+                  : "mainBackgroundLight"
+              }
+            >
+              {children}
+            </div>
+            <div
+              className={
+                mode != undefined && mode.value == "dark"
+                  ? "footerBackGroundDark"
+                  : "footerBackGroundLight"
+              }
+            >
+              <CustomFooter />
+            </div>
+          </StyledComponentsRegistry>
+        </Providers>
       </body>
     </html>
   );

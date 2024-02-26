@@ -6,11 +6,6 @@ import DarkMode from "./darkMode";
 import SignOut from "./signOut";
 
 const NavBar = () => {
-  const linkStyle = {
-    textDecoration: "none",
-    color: "grey",
-    fontWeight: "bold",
-  };
   let mode = cookies().get("mode");
   return (
     <div>
@@ -26,6 +21,7 @@ const NavBar = () => {
             style={{
               display: "flex",
               alignItems: "center",
+              justifyContent: "center",
               border: "1px solid black",
               borderRadius: "25px",
               backgroundColor: "rgb(135,97,225)",
@@ -59,22 +55,50 @@ const NavBar = () => {
           }}
         >
           <div>
-            <Link href="/dashboard/mysolutions" style={linkStyle}>
+            <Link
+              className={
+                mode != undefined && mode.value == "dark"
+                  ? "navBarComponentDark"
+                  : "navBarComponentLight"
+              }
+              href="/dashboard/mysolutions"
+            >
               내 풀이들
             </Link>
           </div>
           <div>
-            <Link href="/dashboard/solutionboard" style={linkStyle}>
+            <Link
+              className={
+                mode != undefined && mode.value == "dark"
+                  ? "navBarComponentDark"
+                  : "navBarComponentLight"
+              }
+              href="/dashboard/solutionboard"
+            >
               다른풀이 둘러보기
             </Link>
           </div>
           <div>
-            <Link href="/dashboard/ranking" style={linkStyle}>
+            <Link
+              className={
+                mode != undefined && mode.value == "dark"
+                  ? "navBarComponentDark"
+                  : "navBarComponentLight"
+              }
+              href="/dashboard/ranking"
+            >
               랭킹 보드
             </Link>
           </div>
           <div>
-            <Link href="/dashboard/myinfo" style={linkStyle}>
+            <Link
+              className={
+                mode != undefined && mode.value == "dark"
+                  ? "navBarComponentDark"
+                  : "navBarComponentLight"
+              }
+              href="/dashboard/myinfo"
+            >
               내 정보
             </Link>
           </div>
