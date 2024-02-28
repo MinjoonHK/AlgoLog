@@ -13,7 +13,7 @@ Next.js 와 MongoDB 를 이용한 토이 프로젝트입니다.
   <li>Env : Node.js@v18.17.0</li>
   <li>IDE : VScode</li>
   <li>DB : MongoDB </li>
-  <li>Deploy: AWS Elastic Beanstalk</li>
+  <li>Deploy: AWS Elastic Beanstalk, AWS CloudFront</li>
 </ul>
 
 ### 🏠URL
