@@ -17,7 +17,7 @@ Next.js 와 MongoDB 를 이용한 토이 프로젝트입니다.
 </ul>
 
 ### 🏠URL
-<a href="https://vxtkorea.net/">https://vxtkorea.net/</a>
+<a href="https://algorithmlog.com">https://algorithmlog.com</a>
 
 ## 📌주요 기능
 ### -메일 발송
