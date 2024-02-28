@@ -1,3 +1,3 @@
 export default function Ranking() {
-  return <div>Ranking</div>;
+  return <div>게시판</div>;
 }

@@ -1,6 +1,9 @@
 import connectDB from "@/database/db";
-import { Button, Card } from "antd";
+import { Card } from "antd";
 import { ObjectId } from "mongodb";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import MarkDown from "./markDownContent";
 
 async function Detail(props: any) {
   const db = (await connectDB).db("algolog");
@@ -9,11 +12,10 @@ async function Detail(props: any) {
     .findOne({ _id: new ObjectId(props.params.id) });
 
   return (
-    <>
+    <div style={{ marginLeft: "20%", marginRight: "20%", paddingTop: "5%" }}>
       <Card
         style={{
           border: "transparent",
-          margin: "0 20%",
         }}
         title={
           <div
@@ -28,19 +30,10 @@ async function Detail(props: any) {
           </div>
         }
       >
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <span>hi</span>
-          <span>hi</span>
-        </div>
-        <pre>
-          <code>
-            {`fucntion hello(){
-              console.log('hello');
-            }`}
-          </code>
-        </pre>
+        <div style={{ display: "flex", justifyContent: "space-between" }}></div>
+        <MarkDown result={result.content} />
       </Card>
-    </>
+    </div>
   );
 }
 

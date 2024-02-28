@@ -1,20 +1,12 @@
 "use client";
 
-import { Button, Card, Dropdown, MenuProps, Space, Spin } from "antd";
-import {
-  DownOutlined,
-  EditOutlined,
-  HeartFilled,
-  HeartOutlined,
-  MessageOutlined,
-} from "@ant-design/icons";
+import { Card, Spin } from "antd";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Search, { SearchProps } from "antd/es/input/Search";
 import Link from "next/link";
 import Meta from "antd/es/card/Meta";
-import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
-import Swal from "sweetalert2";
+import { HeartFilled, HeartOutlined, MessageOutlined } from "@ant-design/icons";
 
 interface dataType {
   _id: string;
@@ -25,61 +17,16 @@ interface dataType {
   CreatedAt: Date;
 }
 
-const items: MenuProps["items"] = [
-  {
-    label: "백준",
-    key: "1",
-  },
-  {
-    label: "프로그래머스",
-    key: "2",
-  },
-  {
-    label: "LeetCode",
-    key: "3",
-  },
-  {
-    label: "SWEA",
-    key: "4",
-  },
-  {
-    label: "SOFTEER",
-    key: "5",
-  },
-];
-
-const handleMenuClick: MenuProps["onClick"] = (e) => {
-  console.log("click", e);
-};
-
-const menuProps = {
-  items,
-  onClick: handleMenuClick,
-};
-
-const MySolutionsData = () => {
-  const { data: session } = useSession();
-  const router = useRouter();
-
-  if (!session) {
-    Swal.fire({
-      icon: "error",
-      title: "로그인 필요",
-      text: "로그인이 필요한 서비스입니다.",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        router.push("/auth/login");
-      }
-    });
-  }
-
+const SolutionBoardData = () => {
   const [postItems, setPostItems] = useState<dataType[]>([]);
   const [loading, setLoading] = useState(true);
+  const [searchedItems, setSearchedItems] = useState<dataType[]>([]);
   const [heartClicked, setHeartClicked] = useState(false);
 
   const fetchData = async () => {
-    axios.get("/api/posts").then((response) => {
+    axios.get("/api/publicpost").then((response) => {
       setPostItems(response.data);
+      setSearchedItems(response.data);
     });
   };
 
@@ -88,37 +35,33 @@ const MySolutionsData = () => {
     fetchData();
     setLoading(false);
   }, []);
+
+  const onSearch: SearchProps["onSearch"] = (value, _e) => {
+    if (value === "") {
+      setSearchedItems(postItems);
+    } else {
+      const filteredData = postItems.filter((item) => {
+        return item.title.includes(value);
+      });
+      setSearchedItems(filteredData);
+    }
+  };
+
   return (
     <div>
       <div style={{ padding: "2% 15%" }}>
         <div
           style={{
             display: "flex",
-            justifyContent: "right",
-            padding: "0 50px",
+            justifyContent: "center",
           }}
         >
-          <div>
-            <span style={{ fontWeight: "bold" }}>
-              작성한 풀이수: {postItems.length}
-            </span>
-            <span>
-              <Dropdown menu={menuProps}>
-                <Button>
-                  <Space>
-                    출처 분류
-                    <DownOutlined />
-                  </Space>
-                </Button>
-              </Dropdown>
-
-              <Button style={{ marginLeft: "20px" }}>
-                <Link href={"/write"}>
-                  <EditOutlined /> 새 풀이
-                </Link>
-              </Button>
-            </span>
-          </div>
+          <Search
+            size="large"
+            style={{ width: "50%", color: "#1677ff" }}
+            placeholder="문제 검색하기"
+            onSearch={onSearch}
+          />
         </div>
         {loading ? (
           <div style={{ marginTop: "20%" }}>
@@ -134,7 +77,7 @@ const MySolutionsData = () => {
               gridTemplateColumns: "1fr 1fr 1fr",
             }}
           >
-            {postItems.map((item, idx) => {
+            {searchedItems.map((item, idx) => {
               return (
                 <div key={idx} style={{ margin: "25px", textAlign: "center" }}>
                   <Card
@@ -208,4 +151,4 @@ const MySolutionsData = () => {
   );
 };
 
-export default MySolutionsData;
+export default SolutionBoardData;

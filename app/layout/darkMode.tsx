@@ -35,7 +35,7 @@ export default function DarkMode() {
           router.refresh();
         }
       }}
-      style={{ position: "absolute", right: "7%", cursor: "pointer" }}
+      style={{ marginLeft: "10px", cursor: "pointer" }}
     >
       {mode == "light" ? "🌙" : "🌞"}
     </div>

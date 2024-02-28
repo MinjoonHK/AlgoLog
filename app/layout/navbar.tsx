@@ -87,7 +87,7 @@ const NavBar = () => {
               }
               href="/dashboard/ranking"
             >
-              랭킹 보드
+              정보 공유 게시판
             </Link>
           </div>
           <div>

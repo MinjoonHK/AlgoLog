@@ -10,16 +10,23 @@ export default function SignOut() {
 
   return (
     <div style={{ marginLeft: "10%" }}>
-      <Button
-        style={{ display: status === "authenticated" ? "block" : "none" }}
-        onClick={() => {
-          signOut({ callbackUrl: "/auth/login" });
-          router.push("/auth/login");
-          console.log("signOut");
-        }}
-      >
-        LOGOUT
-      </Button>
+      {status === "authenticated" ? (
+        <Button
+          onClick={() => {
+            signOut({ callbackUrl: "/auth/login" });
+          }}
+        >
+          LOGOUT
+        </Button>
+      ) : (
+        <Button
+          onClick={() => {
+            router.push("/auth/login");
+          }}
+        >
+          LOGIN
+        </Button>
+      )}
     </div>
   );
 }

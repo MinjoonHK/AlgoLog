@@ -1,9 +1,8 @@
 "use client";
 
-import { SwapLeftOutlined } from "@ant-design/icons";
 import { Avatar, Button } from "antd";
 import { signIn } from "next-auth/react";
-import { useRouter, redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Swal from "sweetalert2";
 
 export default function SocialLogin() {
@@ -13,7 +12,7 @@ export default function SocialLogin() {
       <div>
         <Button
           onClick={async () => {
-            await signIn("kakao", { callbackUrl: "/dashboard/mysolutions" });
+            await signIn("kakao", { callbackUrl: "/dashboard/solutionboard" });
           }}
           style={{ height: "40px", width: "364.4px", marginTop: "15px" }}
         >
@@ -26,7 +25,7 @@ export default function SocialLogin() {
       <div>
         <Button
           onClick={async () => {
-            await signIn("github", { callbackUrl: "/dashboard/mysolutions" });
+            await signIn("github", { callbackUrl: "/dashboard/solutionboard" });
           }}
           style={{ height: "40px", width: "364.4px", marginTop: "15px" }}
         >
@@ -43,7 +42,7 @@ export default function SocialLogin() {
       <div>
         <Button
           onClick={async () => {
-            await signIn("google", { callbackUrl: "/dashboard/mysolutions" });
+            await signIn("google", { callbackUrl: "/dashboard/solutionboard" });
             if (!signIn) {
               Swal.fire({
                 icon: "error",

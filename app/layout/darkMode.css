@@ -27,23 +27,27 @@
 .mainBackgroundDark {
   background-color: #222;
   color: white;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .mainBackgroundLight {
   background-color: grey;
   color: black;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .footerBackGroundDark {
   font-weight: bold;
   background-color: #222;
   color: white;
+  bottom: 0;
+  height: 7vh;
 }
 
 .footerBackGroundLight {
   font-weight: bold;
   background-color: grey;
   color: black;
+  bottom: 0;
+  height: 7vh;
 }

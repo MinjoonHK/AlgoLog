@@ -1,6 +1,6 @@
 import MySolutionsData from "./mySolutionsData";
 
-export default function MySoltuons() {
+export default async function MySoltuons() {
   return (
     <div>
       <MySolutionsData />

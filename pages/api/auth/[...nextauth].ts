@@ -3,8 +3,6 @@ import GoogleProvider from "next-auth/providers/google";
 import GithubProvider from "next-auth/providers/github";
 import KakaoProvider from "next-auth/providers/kakao";
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
-import CredentialsProvider from "next-auth/providers/credentials";
-import bcrypt from "bcrypt";
 import connectDB from "@/database/db";
 
 const {
@@ -48,6 +46,9 @@ export const authOptions = {
         return false;
       }
     },
+  },
+  pages: {
+    signIn: "/auth/login",
   },
 
   /** 유저정보 자동저장 */

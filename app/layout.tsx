@@ -2,8 +2,6 @@ import React from "react";
 import { Inter } from "next/font/google";
 import StyledComponentsRegistry from "../lib/AntdRegistry";
 import "./globals.css";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import Navbar from "./layout/navbar";
 import { cookies } from "next/headers";
 import "./layout/darkMode.css";
@@ -38,7 +36,7 @@ const RootLayout = async ({ children }: React.PropsWithChildren) => {
             >
               {children}
             </div>
-            <div
+            <footer
               className={
                 mode != undefined && mode.value == "dark"
                   ? "footerBackGroundDark"
@@ -46,7 +44,7 @@ const RootLayout = async ({ children }: React.PropsWithChildren) => {
               }
             >
               <CustomFooter />
-            </div>
+            </footer>
           </StyledComponentsRegistry>
         </Providers>
       </body>
