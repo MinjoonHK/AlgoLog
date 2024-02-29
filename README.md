@@ -16,6 +16,27 @@ Next.js 와 MongoDB 를 이용한 토이 프로젝트입니다.
   <li>Deploy: AWS Elastic Beanstalk</li>
 </ul>
 
+### 🖼️ 프로젝트 이미지
+<details>
+<summary>이미지#1</summary>
+  ![image](https://github.com/MinjoonHK/AlgoLog/assets/108560916/8939c30c-4820-47b1-8ced-cb1a439d8c96)
+</details>
+
+<details>
+<summary>이미지#2</summary>
+  ![image](https://github.com/MinjoonHK/AlgoLog/assets/108560916/9c4d5f91-b0d2-45ee-963b-0ce8f282ec87)
+</details>
+
+<details>
+<summary>이미지#3</summary>
+  ![image](https://github.com/MinjoonHK/AlgoLog/assets/108560916/03cf2c51-de28-40de-9744-a79b765694eb)
+</details>
+
+
+
+
+
+
 ### 🏠URL
 <a href="https://algorithmlog.com">https://algorithmlog.com</a>
 
