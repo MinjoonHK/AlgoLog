@@ -1,5 +1,5 @@
 # AlgoLog
-알고리즘 풀이를 기록하고 공유하며 자신의 성취를 돌아볼수 있는 웹페이지 입니다.
+알고리즘 풀이를 기록, 공유, 질문 할수있는 웹페이지 입니다.
 
 ## 💻 프로젝트 소개
 Next.js 와 MongoDB 를 이용한 토이 프로젝트입니다.
@@ -13,7 +13,7 @@ Next.js 와 MongoDB 를 이용한 토이 프로젝트입니다.
   <li>Env : Node.js@v18.17.0</li>
   <li>IDE : VScode</li>
   <li>DB : MongoDB </li>
-  <li>Deploy: AWS Elastic Beanstalk, AWS CloudFront</li>
+  <li>Deploy: AWS Elastic Beanstalk</li>
 </ul>
 
 ### 🏠URL
