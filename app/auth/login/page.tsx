@@ -3,12 +3,31 @@
 import { Button, Checkbox, Form, Input, Card, Divider, Avatar } from "antd";
 import Link from "next/link";
 import SocialLogin from "./socailLogin";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import Swal from "sweetalert2";
 
-interface LoginForm {
-  email: any;
-  password: any;
-}
 function Login() {
+  const router = useRouter();
+  const onFinish = async ({ email, password }) => {
+    const result = await signIn("credentials", {
+      email: email,
+      password: password,
+      redirect: false,
+    });
+    if (result) {
+      if (result.status == 401) {
+        Swal.fire({
+          icon: "error",
+          title: "로그인 실패",
+          text: "아이디 또는 비밀번호가 일치하지 않습니다.",
+        });
+      } else {
+        router.push("/dashboard/solutionboard");
+      }
+    }
+  };
+
   return (
     <div
       style={{
@@ -41,16 +60,13 @@ function Login() {
           A L G O L O G
         </div>
         <Form
-          //   form={form}
           name="Login"
           layout="vertical"
           style={{
             maxWidth: 600,
             margin: "30px 500px",
           }}
-          // initialValues={{ email: email, remember: true }}
-          // onFinish={onFinish}
-          // onFinishFailed={onFinishFailed}
+          onFinish={onFinish}
           autoComplete="off"
         >
           <Form.Item

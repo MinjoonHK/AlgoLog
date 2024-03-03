@@ -28,12 +28,14 @@
   background-color: #222;
   color: white;
   min-height: 100vh;
+  padding-bottom: 7vh;
 }
 
 .mainBackgroundLight {
   background-color: grey;
   color: black;
   min-height: 100vh;
+  padding-bottom: 7vh;
 }
 
 .footerBackGroundDark {

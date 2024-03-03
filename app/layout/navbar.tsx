@@ -85,7 +85,7 @@ const NavBar = () => {
                   ? "navBarComponentDark"
                   : "navBarComponentLight"
               }
-              href="/dashboard/ranking"
+              href="/dashboard/noticeboard"
             >
               정보 공유 게시판
             </Link>

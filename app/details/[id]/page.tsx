@@ -1,18 +1,18 @@
 import connectDB from "@/database/db";
-import { Card } from "antd";
+import { Button, Card, Divider } from "antd";
 import { ObjectId } from "mongodb";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
 import MarkDown from "./markDownContent";
+import DeleteButton from "./deleteButton";
+import CommentForm from "./commentForm";
 
 async function Detail(props: any) {
   const db = (await connectDB).db("algolog");
   let result = await db
     .collection("post")
     .findOne({ _id: new ObjectId(props.params.id) });
-
   return (
     <div style={{ marginLeft: "20%", marginRight: "20%", paddingTop: "5%" }}>
+      <DeleteButton userEmail={result.authorEmail} />
       <Card
         style={{
           border: "transparent",
@@ -33,6 +33,10 @@ async function Detail(props: any) {
         <div style={{ display: "flex", justifyContent: "space-between" }}></div>
         <MarkDown result={result.content} />
       </Card>
+      <Divider style={{ border: "1px solid rgb(45,45,45)" }} />
+      <div>
+        <CommentForm />
+      </div>
     </div>
   );
 }

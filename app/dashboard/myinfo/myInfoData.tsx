@@ -2,7 +2,7 @@
 
 import { Card, Form, Input } from "antd";
 import axios from "axios";
-import { useSession } from "next-auth/react";
+import { getSession, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
@@ -20,23 +20,24 @@ const nullInfo = {
 };
 
 export default function MyInfoData() {
-  const { data: session } = useSession();
+  const session = getSession();
   const router = useRouter();
 
-  if (!session) {
-    Swal.fire({
-      icon: "error",
-      title: "로그인 필요",
-      text: "로그인이 필요한 서비스입니다.",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        router.push("/auth/login");
-      }
-    });
-  }
+  session.then((res) => {
+    if (res == null) {
+      Swal.fire({
+        icon: "error",
+        title: "로그인 필요",
+        text: "로그인이 필요한 서비스입니다.",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          router.push("/auth/login");
+        }
+      });
+    }
+  });
 
   const [userInfo, setUserInfo] = useState<UserInfo>(nullInfo);
-
   const fetchUserInfo = async () =>
     await axios.get("/api/userinfo").then((response) => {
       setUserInfo(response.data);
@@ -46,6 +47,7 @@ export default function MyInfoData() {
     fetchUserInfo();
   }, []);
 
+  console.log(userInfo);
   return (
     <div
       style={{

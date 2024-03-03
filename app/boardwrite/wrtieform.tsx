@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 import { Router } from "next/router";
 import { useRouter } from "next/navigation";
 
-export default function WriteForm() {
+export default function BoardWriteForm() {
   const router = useRouter();
   const [content, setContent] = useState("");
 
@@ -54,11 +54,11 @@ export default function WriteForm() {
             name="title"
             rules={[{ required: true, message: "제목을 입력해 주세요!" }]}
           >
-            <Input size="large" placeholder="1000번 A+B" />
+            <Input size="large" placeholder="백준 1000번 모르겠어요 ㅠㅠ" />
           </Form.Item>
           <Form.Item
-            rules={[{ required: true, message: "문제 출처를 선택해 주세요!" }]}
-            name="sitename"
+            rules={[{ required: true, message: "글 분류를 선택해주세요!" }]}
+            name="option"
             style={{
               display: "inline-block",
               width: "calc(20% - 8px)",
@@ -67,13 +67,10 @@ export default function WriteForm() {
           >
             <Select
               size="large"
-              placeholder="문제 출처"
+              placeholder="글 분류"
               options={[
-                { value: "baekjoon", label: "백준" },
-                { value: "programmers", label: "프로그래머스" },
-                { value: "samsung", label: "SWEA" },
-                { value: "leetcode", label: "LEETCODE" },
-                { value: "softeer", label: "SOFTEER" },
+                { value: "question", label: "질문" },
+                { value: "advice", label: "도움 되는 정보" },
               ]}
             />
           </Form.Item>

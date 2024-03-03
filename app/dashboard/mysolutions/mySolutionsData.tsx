@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Meta from "antd/es/card/Meta";
 import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
+import { getSession, useSession } from "next-auth/react";
 import Swal from "sweetalert2";
 
 interface dataType {
@@ -25,7 +25,7 @@ interface dataType {
   CreatedAt: Date;
 }
 
-const items: MenuProps["items"] = [
+const items = [
   {
     label: "백준",
     key: "1",
@@ -48,38 +48,34 @@ const items: MenuProps["items"] = [
   },
 ];
 
-const handleMenuClick: MenuProps["onClick"] = (e) => {
-  console.log("click", e);
-};
-
-const menuProps = {
-  items,
-  onClick: handleMenuClick,
-};
-
 const MySolutionsData = () => {
-  const { data: session } = useSession();
+  const session = getSession();
   const router = useRouter();
 
-  if (!session) {
-    Swal.fire({
-      icon: "error",
-      title: "로그인 필요",
-      text: "로그인이 필요한 서비스입니다.",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        router.push("/auth/login");
-      }
-    });
-  }
+  session.then((res) => {
+    if (res == null) {
+      Swal.fire({
+        icon: "error",
+        title: "로그인 필요",
+        text: "로그인이 필요한 서비스입니다.",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          router.push("/auth/login");
+        }
+      });
+    }
+  });
 
   const [postItems, setPostItems] = useState<dataType[]>([]);
   const [loading, setLoading] = useState(true);
   const [heartClicked, setHeartClicked] = useState(false);
+  const [dropdownSelected, setDropdownSelected] = useState("출처 분류");
+  const [filteredData, setFilteredData] = useState<dataType[]>([]);
 
   const fetchData = async () => {
     axios.get("/api/posts").then((response) => {
       setPostItems(response.data);
+      setFilteredData(response.data);
     });
   };
 
@@ -88,6 +84,23 @@ const MySolutionsData = () => {
     fetchData();
     setLoading(false);
   }, []);
+
+  const handleMenuClick: MenuProps["onClick"] = (e) => {
+    const selectedItem = items[Number(e.key) - 1];
+    if (selectedItem) {
+      setDropdownSelected(selectedItem.label);
+    }
+    const filteredData = postItems.filter((item) => {
+      return item.title.includes(dropdownSelected);
+    });
+    setFilteredData(filteredData);
+  };
+
+  const menuProps = {
+    items,
+    onClick: handleMenuClick,
+  };
+
   return (
     <div>
       <div style={{ padding: "2% 15%" }}>
@@ -99,14 +112,11 @@ const MySolutionsData = () => {
           }}
         >
           <div>
-            <span style={{ fontWeight: "bold" }}>
-              작성한 풀이수: {postItems.length}
-            </span>
             <span>
               <Dropdown menu={menuProps}>
                 <Button>
                   <Space>
-                    출처 분류
+                    {dropdownSelected}
                     <DownOutlined />
                   </Space>
                 </Button>
@@ -134,7 +144,7 @@ const MySolutionsData = () => {
               gridTemplateColumns: "1fr 1fr 1fr",
             }}
           >
-            {postItems.map((item, idx) => {
+            {filteredData.map((item, idx) => {
               return (
                 <div key={idx} style={{ margin: "25px", textAlign: "center" }}>
                   <Card

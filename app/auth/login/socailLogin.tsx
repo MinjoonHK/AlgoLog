@@ -12,14 +12,14 @@ export default function SocialLogin() {
       <div>
         <Button
           onClick={async () => {
-            await signIn("kakao", { callbackUrl: "/dashboard/solutionboard" });
+            await signIn("naver", { callbackUrl: "/dashboard/solutionboard" });
           }}
           style={{ height: "40px", width: "364.4px", marginTop: "15px" }}
         >
-          <span style={{ marginRight: "10%", fontWeight: "bold" }}>
-            카카오톡으로 로그인 하기{" "}
+          <span style={{ marginRight: "6%", fontWeight: "bold" }}>
+            네이버계정으로 로그인 하기
           </span>
-          <Avatar size={30} src={"/img/kakao_icon4.png"} />
+          <Avatar size={30} src={"/img/naver_icon.png"} />
         </Button>
       </div>
       <div>
